@@ -38,22 +38,20 @@ describe('Green Run - GET geocode with valid api key', () => {
 
 describe('Validate data ', () => {
     let formatted_address_withOut_region, place_id_withOut_region;
-    it('Region biasing with Toledo', async () => {
+    it('Address with and without region ', async () => {
         const res = await REQUEST.get('address=Toledo&key=' + API_KEY);
         expect(res.body.status).to.be.equals('OK');
         expect(res.body.results).to.not.be.length(0);
         //store formatted_address and place_id
         formatted_address_withOut_region = res.body.results[0].formatted_address;
         place_id_withOut_region = res.body.results[0].place_id;
-    });
 
-    it('Region biasing with Toledo with region=es', async () => {
-        const res = await REQUEST.get('address=Toledo&region=es&key=' + API_KEY);
-        expect(res.body.status).to.be.equals('OK');
-        expect(res.body.results).to.not.be.length(0);
+        const regionRes = await REQUEST.get('address=Toledo&region=es&key=' + API_KEY);
+        expect(regionRes.body.status).to.be.equals('OK');
+        expect(regionRes.body.results).to.not.be.length(0);
         // validate formatted_address with  region=es and without region 
-        expect(res.body.results[0].formatted_address).to.not.be.equals(formatted_address_withOut_region);
-        expect(res.body.results[0].place_id).to.not.be.equals(place_id_withOut_region);
+        expect(regionRes.body.results[0].formatted_address).to.not.be.equals(formatted_address_withOut_region);
+        expect(regionRes.body.results[0].place_id).to.not.be.equals(place_id_withOut_region);
     });
 
 });
