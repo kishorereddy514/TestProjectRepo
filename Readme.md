@@ -1,35 +1,55 @@
-Background
-Railz is an API first company, with a Node.js / JavaScript based stack. In addition to API services,
-we have a browser based dashboard, which allows for account management. Assume that
-infrastructure is on AWS, consists of microservices and includes both SQL and NoSQL
-datastores.
-1. Given the Google Geocoding API, and assuming that all output is in JSON:
-https://developers.google.com/maps/documentation/geocoding/overview
-Outline the set of manual tests that you would perform for:
-• a complete green run
-• error / exception cases
-• performance / security
-You may use the following API key:
-AIzaSyBNW9ny7Q9TS1iRLYWgrWo4CwAb3wmrEik
-2. Create a set of automated tests using a JavaScript test framework of your choice that
-covers the green run in part (3). The responses for this section should be provided as
-code, with either instructions on how to run, or the code with a sample of the live
-output.
+# Manual Tests:
+## Complete Green Run
 
+ * Query with valid address
+    * Given the valid URL and API key 
+    * When the valid 'address' is passed as query param 
+    * Then validate status code is '200' and status is 'OK'
 
-Manual Tests:
-• a complete green run
-    * Validate status code with valid URL, API key and valid address 
-    * Validate status code with valid URL, API key and latitude and longitude
+ * Query Viewport biasing
+    * Given the valid URL and API key
+    * When the valid 'address' is passed as query param
+    * Then validate status code is '200'
+ 
+ * Query Reverse geocoding filtered with latlng
+     * Given the valid URL and API key
+     * When the 'latlng' 'location_type' and 'result_type' is passed as query param
+     * Then validate status code is '200'
+     
+ * Address with and without region 
+     * Given url with valid api key
+     * When  just 'address' is passed as query param
+     * When 'address' and 'region' is passed as query param
+     * Then validate both 'formatted_address' and 'place_id' of results not to be equal
+     
+  
+## Negative Tests (error/exception)
 
-• error / exception cases
-    * 
+ * Query with invalid api key
+    * Given the valid URL and invalid api key
+    * When the valid 'address' as query param 
+    * Then validate status is 'REQUEST_DENIED' and error message
+      
+ * Query with invalid query parameter
+    * Given the valid URL and valid api key
+    * When the invalid 'result_type' as query param 
+    * Then validate status is 'INVALID_REQUEST' and results lenght to be '0'
+    
+    Other scenarios that can be covered
+    * For any input when value is null/empty is passed, but when a null is unacceptable, must be rejected
+    * Inputs of an incorrect type or  length/size must be rejected
 
+## Security/ performance    
 
-• performance / security
+* Query without ssl protocol
+    * Given the invalid URL and valid api key
+    * When the valid 'address' as query param 
+    * Then validate status is 'INVALID_REQUEST' and status code to be '400'
+    
 
-Running instructions:
+How to run instructions:
+```bash
 use "npm test" command >> it will generate console output 
 use "npm test_report" >> it will generate report.html file 
-
+```
 
