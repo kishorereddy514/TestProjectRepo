@@ -10,6 +10,7 @@ before(async () => {
 
 //Positive test 
 describe('Green Run - GET geocode with valid api key', () => {
+    
     it('GeoCoding response', async () => {
         const res = await REQUEST.get('address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=' + API_KEY);
         expect(res.statusCode).to.be.equals(200);
@@ -31,8 +32,6 @@ describe('Green Run - GET geocode with valid api key', () => {
         expect(res.body.results).to.not.be.length(0);
 
     });
-
-
 });
 
 

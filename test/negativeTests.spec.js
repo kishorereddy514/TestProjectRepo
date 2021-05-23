@@ -25,9 +25,6 @@ describe('Negative Scenarios', () => {
         expect(res.body.results).to.be.length(0);
         expect(res.body.status).to.be.equals('INVALID_REQUEST');
     });
-
-
-
 });
 
 

@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --timeout 5000",
-    "test_report": "mocha test/*.js --timeout 5000 --reporter mocha-simple-html-reporter --reporter-options output=report.html"
+    "test_report": "mocha --timeout 5000 --reporter mocha-simple-html-reporter --reporter-options output=report.html"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "@babel/node": "^7.14.2",
     "@babel/preset-env": "^7.14.2",
     "@babel/register": "^7.13.16",
+    "loadtest": "^5.1.2",
     "chai": "^4.3.4",
     "mocha": "^8.4.0",
     "mocha-simple-html-reporter": "^2.0.0",
@@ -24,7 +25,8 @@
     "test": "test"
   },
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.14.3"
+    "@babel/plugin-transform-runtime": "^7.14.3",
+    "dotenv": "^10.0.0"
   },
   "description": ""
 }
